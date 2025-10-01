@@ -3,6 +3,7 @@ import './Header.css'
 import { FiSearch, FiMapPin, FiHome } from 'react-icons/fi'
 import Button from '../../general/button/Button'
 import SearchHeader from '../../general/search_header/SearchHeader'
+import iconTitulo from '../../../assets/images/icon_titulo.svg'
 
 const Header = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
@@ -65,7 +66,7 @@ const Header = () => {
                   {currentText}
                   <span className="cursor">|</span>
                   <img 
-                    src="/src/assets/images/icon_titulo.svg" 
+                    src={iconTitulo} 
                     alt="" 
                     className="title-icon"
                   />
