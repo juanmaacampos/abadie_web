@@ -1,0 +1,63 @@
+.top-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  background: linear-gradient(
+    135deg,
+    var(--color-title) 0%,
+    rgba(0, 82, 156, 0.9) 100%
+  );
+  color: white;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid var(--color-accent);
+  box-shadow: 
+    0 4px 15px rgba(0, 82, 156, 0.3),
+    0 8px 25px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.top-button.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.top-button:hover {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    #e6a640 100%
+  );
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 
+    0 8px 25px rgba(253, 191, 80, 0.4),
+    0 12px 35px rgba(0, 0, 0, 0.2);
+  border-color: white;
+}
+
+.top-button:active {
+  transform: translateY(-2px) scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .top-button {
+    width: 50px;
+    height: 50px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .top-button:hover {
+    transform: translateY(-3px) scale(1.05);
+  }
+}

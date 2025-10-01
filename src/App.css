@@ -1,0 +1,50 @@
+/* Estilos específicos del App */
+main {
+  padding-top: var(--navbar-height);
+}
+
+/* Estilos para las secciones de demo */
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: calc(100vh - var(--navbar-height));
+}
+
+section:nth-child(even) {
+  background-color: var(--color-section-bg);
+}
+
+section h1,
+section h2 {
+  margin-bottom: 1rem;
+}
+
+section p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#home {
+  background: linear-gradient(135deg, var(--color-background) 0%, var(--color-section-bg) 100%);
+  margin-top: calc(-1 * var(--navbar-height));
+  padding-top: var(--navbar-height);
+}
+
+#home h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  #home h1 {
+    font-size: 2rem;
+  }
+  
+  section p {
+    font-size: 1rem;
+  }
+}

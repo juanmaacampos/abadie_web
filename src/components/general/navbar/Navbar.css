@@ -1,0 +1,277 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  padding: 0.4rem 0;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 55px;
+  transition: all 0.4s ease;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  z-index: 1001; /* Ensure logo stays above mobile menu */
+  transition: all 0.4s ease;
+}
+
+/* Logo brand normal */
+
+.navbar-logo {
+  height: 40px; /* Tamaño estándar consistente */
+  width: auto;
+  max-width: none;
+  transition: all 0.3s ease;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+
+.navbar-menu a {
+  color: var(--color-text-primary, #333333); /* Dark text for light background */
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.navbar-menu a:hover {
+  color: var(--color-accent);
+}
+
+/* Improved navbar button styling */
+.navbar-btn {
+  padding: 0.5rem 1.25rem !important;
+  margin-left: 0.5rem;
+  border: 2px solid var(--color-accent) !important;
+  border-radius: 5px !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  transition: all 0.3s ease !important;
+}
+
+/* Button in transparent navbar state */
+.navbar-in-header:not(.navbar-scrolled) .navbar-btn {
+  color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Button in scrolled or non-header navbar state */
+.navbar-scrolled .navbar-btn, 
+.navbar:not(.navbar-in-header) .navbar-btn {
+  color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  background-color: transparent;
+}
+
+/* Hover state for button - updated to match header's view services button */
+.navbar-btn:hover {
+  color: #5028d9 !important;
+  background-color: transparent !important;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.mobile-menu-toggle {
+  display: flex;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001; /* Ensure button stays above mobile menu */
+  transition: all 0.4s ease;
+}
+
+.mobile-menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--color-text-primary);
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+/* Hamburger icon color for the light semi-transparent navbar state */
+.navbar-scrolled .mobile-menu-toggle span,
+.navbar:not(.navbar-in-header) .mobile-menu-toggle span {
+  background-color: var(--color-text-primary, #333333); /* Dark hamburger icon lines */
+}
+
+/* Hamburger menu animation */
+.mobile-menu-toggle.active span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.mobile-menu {
+  position: absolute; /* Positioned relative to the navbar */
+  top: calc(100% + 10px); /* Start 10px below the navbar */
+  left: 10px; /* Add some space from the left edge */
+  right: 10px; /* Add some space from the right edge */
+  width: auto; /* Adjust width based on left/right spacing */
+  background-color: rgba(255, 255, 255, 0.85); /* Light semi-transparent background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow for floating effect */
+  z-index: 999; /* Below navbar elements like logo/toggle if they have higher z-index */
+  
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: space-around; /* Distribute items nicely */
+  padding: 0.75rem; /* Padding for the panel */
+  border-radius: 8px; /* Rounded corners for floating look */
+  
+  transform-origin: top;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transform: scaleY(0.95) translateY(-10px); /* Initial state for animation */
+  opacity: 0;
+  pointer-events: none; /* Not interactive when hidden */
+  list-style: none; /* Remove default list styling */
+  margin: 0; /* Remove default margin */
+}
+
+.mobile-menu.active {
+  transform: scaleY(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto; /* Interactive when shown */
+}
+
+.mobile-menu li {
+  /* Removed specific li styling like border, relying on link styling */
+  margin: 0.25rem; /* Small margin around items */
+}
+
+.mobile-menu a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-text-secondary, #555); /* Default color, adjust as needed */
+  padding: 0.5rem;
+  min-width: 70px; /* Minimum width for each item */
+  transition: color 0.2s ease, background-color 0.2s ease;
+  border-radius: 4px;
+}
+
+.mobile-menu a:hover {
+  background-color: rgba(0,0,0,0.05);
+  color: var(--color-accent, #A0522D); /* Hover color, adjust as needed */
+}
+
+.mobile-menu .nav-icon {
+  font-size: 1.8rem; /* Adjust icon size to match image */
+  margin-bottom: 0.2rem; /* Smaller space between icon and text */
+  line-height: 1; /* Ensure icon vertical alignment */
+}
+
+.mobile-menu .nav-icon svg { /* Target SVG within the span if react-icons are used */
+  display: block; /* Helps with alignment */
+}
+
+.mobile-menu .nav-text {
+  font-size: 0.7rem; /* Slightly smaller text to match image */
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Active link styling - to match the "Analytics" item in the image */
+.mobile-menu a.active-link .nav-icon,
+.mobile-menu a.active-link .nav-text {
+  color: var(--color-accent-purple, #6A0DAD); /* Purple color for active item, adjust as needed */
+}
+.mobile-menu a.active-link .nav-text {
+  font-weight: 600; /* Bolder text for active item */
+}
+
+.desktop-menu {
+  display: none;
+}
+
+/* Improved mobile contact button styling */
+.nav-contact-btn {
+  color: var(--color-accent) !important;
+  font-weight: 600 !important;
+  background-color: rgba(191, 161, 112, 0.1);
+  border-radius: 6px;
+}
+
+.nav-contact-btn .nav-icon,
+.nav-contact-btn .nav-text {
+  color: var(--color-accent) !important;
+  font-weight: 600 !important;
+}
+
+.nav-contact-btn:hover {
+  background-color: rgba(191, 161, 112, 0.2) !important;
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    padding: 1rem 0;
+  }
+  
+  .navbar-scrolled {
+    /* Ensure scrolled background is consistent with the light semi-transparent style */
+    background-color: rgba(255, 255, 255, 0.85); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.6rem 0; /* Un poco más alta en desktop */
+  }
+  
+  .navbar-scrolled .navbar-content {
+    height: 50px; /* Un poco más alta en desktop */
+  }
+  
+  .desktop-menu {
+    display: flex;
+  }
+  
+  .mobile-menu-toggle {
+    display: none;
+  }
+  
+  .navbar-logo {
+    height: 45px;
+  }
+  
+  .navbar-in-header .navbar-logo {
+    height: 65px;
+  }
+  
+  .navbar-brand.navbar-brand-centered .navbar-logo {
+    height: 80px;
+  }
+  
+  .navbar-scrolled .navbar-logo {
+    height: 35px; /* Más pequeño en desktop cuando está scrolleado */
+  }
+}
