@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import './Navbar.css'
 import logo from '../../../assets/images/logo_abadie.webp'
-import {AiOutlineSetting, AiOutlineInfoCircle, AiOutlineStar, AiOutlineMail } from 'react-icons/ai' // Example icons
+import { FiHome, FiInfo, FiCheckCircle, FiMail } from 'react-icons/fi'
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const navItems = [
-    { name: 'Propiedades', href: '#propiedades', icon: <AiOutlineSetting /> },
-    { name: 'Nosotros', href: '#nosotros', icon: <AiOutlineInfoCircle /> },
-    { name: 'Servicios', href: '#servicios', icon: <AiOutlineStar /> },
-    { name: 'Contacto', href: '#contacto', icon: <AiOutlineMail />, isButton: true }
+    { name: 'Propiedades', href: '#propiedades', icon: <FiHome /> },
+    { name: 'Nosotros', href: '#nosotros', icon: <FiInfo /> },
+    { name: 'Servicios', href: '#servicios', icon: <FiCheckCircle /> },
+    { name: 'Contacto', href: '#contacto', icon: <FiMail />, isButton: true }
   ]
 
   const toggleMobileMenu = () => {
@@ -51,9 +51,36 @@ const Navbar = () => {
             {navItems.map((item) => (
               <li key={item.name}>
                 {item.isButton ? (
-                  <a href={item.href} className="btn-outline navbar-btn">{item.name}</a>
+                  <a 
+                    href={item.href} 
+                    className="btn-outline navbar-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const targetId = item.href.substring(1);
+                      const targetElement = document.getElementById(targetId);
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                  >
+                    <span className="nav-icon-desktop">{item.icon}</span>
+                    {item.name}
+                  </a>
                 ) : (
-                  <a href={item.href}>{item.name}</a>
+                  <a 
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const targetId = item.href.substring(1);
+                      const targetElement = document.getElementById(targetId);
+                      if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                  >
+                    <span className="nav-icon-desktop">{item.icon}</span>
+                    {item.name}
+                  </a>
                 )}
               </li>
             ))}

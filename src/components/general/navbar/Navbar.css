@@ -49,12 +49,24 @@
 .navbar-menu a {
   color: var(--color-text-primary, #333333); /* Dark text for light background */
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px;
 }
 
 .navbar-menu a:hover {
   color: var(--color-accent);
+  background-color: rgba(253, 191, 80, 0.1);
+}
+
+.nav-icon-desktop {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.1rem;
 }
 
 /* Improved navbar button styling */
@@ -67,6 +79,7 @@
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem !important;
   height: 38px;
   transition: all 0.3s ease !important;
 }
@@ -176,32 +189,55 @@
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: var(--color-text-secondary, #555); /* Default color, adjust as needed */
-  padding: 0.5rem;
-  min-width: 70px; /* Minimum width for each item */
-  transition: color 0.2s ease, background-color 0.2s ease;
-  border-radius: 4px;
+  color: var(--color-text-primary);
+  padding: 0.75rem 0.5rem;
+  min-width: 75px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
 }
 
 .mobile-menu a:hover {
-  background-color: rgba(0,0,0,0.05);
-  color: var(--color-accent, #A0522D); /* Hover color, adjust as needed */
+  background-color: rgba(253, 191, 80, 0.1);
+  transform: translateY(-2px);
+}
+
+.mobile-menu a:hover .nav-icon {
+  color: var(--color-accent);
+  transform: scale(1.1);
+}
+
+.mobile-menu a:hover .nav-text {
+  color: var(--color-accent);
+}
+
+.mobile-menu a:hover .nav-icon {
+  color: var(--color-accent);
+  transform: scale(1.1);
+}
+
+.mobile-menu a:hover .nav-text {
+  color: var(--color-accent);
 }
 
 .mobile-menu .nav-icon {
-  font-size: 1.8rem; /* Adjust icon size to match image */
-  margin-bottom: 0.2rem; /* Smaller space between icon and text */
-  line-height: 1; /* Ensure icon vertical alignment */
+  font-size: 1.4rem;
+  margin-bottom: 0.35rem;
+  line-height: 1;
+  color: var(--color-text-primary);
+  transition: all 0.3s ease;
 }
 
-.mobile-menu .nav-icon svg { /* Target SVG within the span if react-icons are used */
-  display: block; /* Helps with alignment */
+.mobile-menu .nav-icon svg {
+  display: block;
+  stroke-width: 2;
 }
 
 .mobile-menu .nav-text {
-  font-size: 0.7rem; /* Slightly smaller text to match image */
+  font-size: 0.75rem;
   font-weight: 500;
   text-align: center;
+  color: var(--color-text-primary);
+  transition: all 0.3s ease;
 }
 
 /* Active link styling - to match the "Analytics" item in the image */
@@ -219,10 +255,8 @@
 
 /* Improved mobile contact button styling */
 .nav-contact-btn {
-  color: var(--color-accent) !important;
-  font-weight: 600 !important;
-  background-color: rgba(191, 161, 112, 0.1);
-  border-radius: 6px;
+  background-color: rgba(253, 191, 80, 0.15);
+  border-radius: 8px;
 }
 
 .nav-contact-btn .nav-icon,
@@ -231,8 +265,13 @@
   font-weight: 600 !important;
 }
 
+.nav-contact-btn .nav-icon {
+  font-size: 1.6rem;
+}
+
 .nav-contact-btn:hover {
-  background-color: rgba(191, 161, 112, 0.2) !important;
+  background-color: rgba(253, 191, 80, 0.25) !important;
+  transform: translateY(-2px);
 }
 
 @media (min-width: 768px) {

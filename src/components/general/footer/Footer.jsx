@@ -17,7 +17,7 @@ const Footer = () => {
           </div>
           
           <div className="footer-links">
-            <div className="footer-section">
+            <div id="servicios" className="footer-section">
               <h4>Servicios</h4>
               <ul>
                 <li><a href="#propiedades">Venta de Propiedades</a></li>
@@ -28,7 +28,7 @@ const Footer = () => {
               </ul>
             </div>
             
-            <div className="footer-section">
+            <div id="contacto" className="footer-section">
               <h4>Contacto</h4>
               <ul>
                 <li>

@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import './Header.css'
 import { FiSearch, FiMapPin, FiHome } from 'react-icons/fi'
-import { HiOutlineHome, HiOutlineOfficeBuilding } from 'react-icons/hi'
-import { BiRuler, BiBuildings } from 'react-icons/bi'
 import Button from '../../general/button/Button'
 import SearchHeader from '../../general/search_header/SearchHeader'
 
@@ -10,8 +8,17 @@ const Header = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [currentText, setCurrentText] = useState('')
   const [isTyping, setIsTyping] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
   
   const words = ['confianza', 'transparencia', 'calidad', 'seriedad', 'trayectoria']
+
+  useEffect(() => {
+    // Trigger animations on mount
+    const timer = setTimeout(() => {
+      setIsVisible(true)
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
   
   useEffect(() => {
     const currentWord = words[currentWordIndex]
@@ -50,43 +57,27 @@ const Header = () => {
       <div className="container">
         <div className="header-content">
           <div className="header-text">
-            <div className="title-container">
-              <div className="blueprint-background"></div>
-              <div className="title-architectural-horizontal">
-                <div className="architectural-lines left">
-                  <HiOutlineHome className="arch-icon left-icon" />
-                  <div className="measurement-mark">0</div>
-                </div>
-                <div className="number-section">
-                  <span className="main-number">
-                    40
-                    <div className="number-blueprint-lines">
-                      <div className="blueprint-line top"></div>
-                      <div className="blueprint-line bottom"></div>
-                    </div>
-                  </span>
-                  <div className="years-badge">
-                    <BiRuler className="badge-icon" />
-                    <span className="years-text">años de</span>
-                    <div className="blueprint-corner"></div>
-                  </div>
-                </div>
-                <div className="architectural-lines right">
-                  <BiBuildings className="arch-icon right-icon" />
-                  <div className="measurement-mark">40</div>
-                </div>
-              </div>
-              <h1 className="header-title">
-                <span className="typewriter-text">
+            <div className={`title-container ${isVisible ? 'fade-in' : ''}`}>
+              <h1 className="main-title">
+                <span className="title-number">+40</span>
+                <span className="title-years">años de</span>
+                <span className="title-word">
                   {currentText}
                   <span className="cursor">|</span>
+                  <img 
+                    src="/src/assets/images/icon_titulo.svg" 
+                    alt="" 
+                    className="title-icon"
+                  />
                 </span>
               </h1>
             </div>
             
-            <SearchHeader />
+            <div className={`search-container ${isVisible ? 'slide-in-up' : ''}`}>
+              <SearchHeader />
+            </div>
             
-            <div className="header-stats">
+            <div className={`header-stats ${isVisible ? 'fade-in-delayed' : ''}`}>
               <div className="stat-item">
                 <FiHome className="stat-icon" />
                 <div className="stat-content">
@@ -111,7 +102,7 @@ const Header = () => {
             </div>
           </div>
           
-          <div className="header-actions">
+          <div className={`header-actions ${isVisible ? 'slide-in-up-delayed' : ''}`}>
             <Button variant="primary" size="large">
               Ver Propiedades
             </Button>
