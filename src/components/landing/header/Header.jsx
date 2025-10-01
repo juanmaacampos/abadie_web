@@ -5,11 +5,47 @@ import Button from '../../general/button/Button'
 import SearchHeader from '../../general/search_header/SearchHeader'
 import iconTitulo from '../../../assets/images/icon_titulo.svg'
 
+// Custom hook para animar contadores
+const useCounter = (end, duration = 1200, start = 0) => {
+  const [count, setCount] = useState(start)
+  const [hasStarted, setHasStarted] = useState(false)
+
+  const startCounter = () => {
+    if (hasStarted) return
+    setHasStarted(true)
+
+    const steps = 50
+    const stepDuration = duration / steps
+    const increment = (end - start) / steps
+    let currentStep = 0
+
+    const interval = setInterval(() => {
+      currentStep++
+      const newValue = start + (increment * currentStep)
+      
+      setCount(Math.floor(newValue))
+
+      if (currentStep >= steps) {
+        clearInterval(interval)
+        setCount(end)
+      }
+    }, stepDuration)
+  }
+
+  return [count, startCounter]
+}
+
 const Header = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [currentText, setCurrentText] = useState('')
   const [isTyping, setIsTyping] = useState(true)
   const [isVisible, setIsVisible] = useState(false)
+  
+  // Contadores para las estadísticas
+  const [titleYears, startTitleCounter] = useCounter(40, 1200)
+  const [properties, startPropertiesCounter] = useCounter(500, 1200)
+  const [zones, startZonesCounter] = useCounter(15, 1200)
+  const [clients, startClientsCounter] = useCounter(1000, 1200)
   
   const words = ['confianza', 'transparencia', 'calidad', 'seriedad', 'trayectoria']
 
@@ -17,9 +53,16 @@ const Header = () => {
     // Trigger animations on mount
     const timer = setTimeout(() => {
       setIsVisible(true)
+      // Iniciar contadores después de que la animación de fade-in comience
+      setTimeout(() => {
+        startTitleCounter()
+        startPropertiesCounter()
+        startZonesCounter()
+        startClientsCounter()
+      }, 300)
     }, 100)
     return () => clearTimeout(timer)
-  }, [])
+  }, [startTitleCounter, startPropertiesCounter, startZonesCounter, startClientsCounter])
   
   useEffect(() => {
     const currentWord = words[currentWordIndex]
@@ -60,7 +103,7 @@ const Header = () => {
           <div className="header-text">
             <div className={`title-container ${isVisible ? 'fade-in' : ''}`}>
               <h1 className="main-title">
-                <span className="title-number">+40</span>
+                <span className="title-number">+{titleYears}</span>
                 <span className="title-years">años de</span>
                 <span className="title-word">
                   {currentText}
@@ -82,21 +125,21 @@ const Header = () => {
               <div className="stat-item">
                 <FiHome className="stat-icon" />
                 <div className="stat-content">
-                  <span className="stat-number">500+</span>
+                  <span className="stat-number">{properties}+</span>
                   <span className="stat-label">Propiedades</span>
                 </div>
               </div>
               <div className="stat-item">
                 <FiMapPin className="stat-icon" />
                 <div className="stat-content">
-                  <span className="stat-number">15</span>
+                  <span className="stat-number">{zones}</span>
                   <span className="stat-label">Zonas</span>
                 </div>
               </div>
               <div className="stat-item">
                 <FiSearch className="stat-icon" />
                 <div className="stat-content">
-                  <span className="stat-number">1000+</span>
+                  <span className="stat-number">{clients}+</span>
                   <span className="stat-label">Clientes Satisfechos</span>
                 </div>
               </div>

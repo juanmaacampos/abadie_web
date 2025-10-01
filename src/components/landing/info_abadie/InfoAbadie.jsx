@@ -36,8 +36,8 @@ const InfoAbadie = () => {
   }, [isVisible])
 
   const animateCounters = () => {
-    const duration = 2000
-    const steps = 60
+    const duration = 1200
+    const steps = 50
     const stepDuration = duration / steps
 
     const targets = {
